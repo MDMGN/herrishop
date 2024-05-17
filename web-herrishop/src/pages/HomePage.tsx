@@ -3,17 +3,18 @@ import { ajax } from "../helpers";
 import { reponseApiProducts } from "../types/responseApi";
 import { Product } from "../types/response";
 import {Products} from "../components";
+import { URL_PRODUCTS } from "../api/API_HERRISHOP";
 
 export function HomePage() {
   const [products, setProducts] = useState([] as Product[])
 
   useEffect(()=>{
     ajax({
-      url: '/api/products',
+      url: URL_PRODUCTS,
       cbSuccess: (response:reponseApiProducts)=>{
-        const {items} = response
+        const {data} = response
         if(!response.error) 
-            setProducts(items)
+            setProducts(data)
       },  
       cbError:(error)=>{
         console.log(error)    

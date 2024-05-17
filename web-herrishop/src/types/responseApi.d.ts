@@ -27,5 +27,5 @@ type reponseApiProducts={
     current_page: int,
     next_page: int | null,
     total_pages: int,
-    items: Product[]
+    data: Product[]
 }

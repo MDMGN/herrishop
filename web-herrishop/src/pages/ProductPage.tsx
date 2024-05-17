@@ -4,6 +4,7 @@ import { ajax } from "../helpers";
 import { NavLink, useParams } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import {Toaster, toast} from 'sonner'
+import { URL_PRODUCTS } from "../api/API_HERRISHOP";
 
 export function ProductPage() {
   const {id} = useParams<{id: string}>();
@@ -14,10 +15,10 @@ export function ProductPage() {
   
   useEffect(()=>{
     ajax({
-      url: `/api/products/${id}`,
-      cbSuccess: ({error,results})=>{
+      url: `${URL_PRODUCTS}/${id}`,
+      cbSuccess: ({error,data})=>{
         if(!error){
-          setProduct(results)
+          setProduct(data)
         }
       },
       cbError: ()=>{},
