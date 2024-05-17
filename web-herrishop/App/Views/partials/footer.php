@@ -1,0 +1,1 @@
+<footer class="footer">&copy<a href="https://github.com/MDMGN" target="_blank" class="link link--light">MDMGN</a> all reserved.</footer>

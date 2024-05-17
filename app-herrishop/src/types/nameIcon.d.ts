@@ -1,0 +1,1 @@
+type typeNameIcon='shopping-bag' | 'favorite' | 'search' | 'home' | 'shopping-store' | 'product-hunt' | 'shopping-basket' | 'opencart'
