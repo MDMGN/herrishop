@@ -2,7 +2,7 @@ import { UserContext } from './UserContext'
 import { ReactNode, useEffect, useState } from 'react'
 import { ajax } from '../../helpers';
 import { URL_LOGIN } from '../../api/API_HERRISHOP';
-import {type  Product } from '../../types/response';
+import {type  Product } from '../../types/entities';
 import {type reponseApiLogin } from '../../types/responseApi';
 
 type Props={

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import type { Product } from "../types/response";
+import type { Product } from "../types/entities";
 import { ajax } from "../helpers";
 import { NavLink, useParams } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";

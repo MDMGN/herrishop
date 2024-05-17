@@ -1,5 +1,5 @@
 import { useCallback, useContext } from "react"
-import { ProductCart } from "../types/response"
+import { ProductCart } from "../types/entities"
 import { UserContext } from "../contexts/UserContext"
 
 export  function TableCart() {

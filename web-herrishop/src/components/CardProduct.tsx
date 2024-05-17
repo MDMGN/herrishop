@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Product } from "../types/response";
+import { Product } from "../types/entities";
 
 type Props={
   product:Product

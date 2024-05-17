@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, createContext } from "react";
-import type { Cart } from "../../types/response";
+import type { Cart } from "../../types/entities";
 
 type UserProvider={
     user: User,

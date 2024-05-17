@@ -1,4 +1,4 @@
-import { Product } from "./response"
+import { Product } from "./entities"
 
 type reponseApiRegister={
     error : boolean,
@@ -28,4 +28,13 @@ type reponseApiProducts={
     next_page: int | null,
     total_pages: int,
     data: Product[]
+}
+
+type reponseApiCategories={
+    error: boolean,
+    count: int,
+    current_page: int,
+    next_page: int | null,
+    total_pages: int,
+    data: Categories[]
 }

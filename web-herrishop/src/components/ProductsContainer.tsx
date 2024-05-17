@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Product } from "../types/response"
+import { Product } from "../types/entities"
 import { ajax } from "../helpers";
 import { Products } from "./Products";
 import { reponseApiProducts } from "../types/responseApi";
