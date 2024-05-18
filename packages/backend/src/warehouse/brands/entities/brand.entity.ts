@@ -4,6 +4,6 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 export class Brand {
     @PrimaryGeneratedColumn('increment')
     id: number;
-    @Column({ unique: true, length: 100 })
+    @Column('varchar',{ length: 100 })
     name: string;
 }

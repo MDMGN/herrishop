@@ -20,6 +20,9 @@ export class Product {
     @Column('smallint')
     unit_stock: number;
 
+    @Column('int')
+    brand_id: number;
+
     @Column('text')
     description: string;
 
