@@ -5,7 +5,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { BrandsModule } from './brands/brands.module';
 
 @Module({
-    imports: [ProductsModule, UsersModule, CategoriesModule, BrandsModule],
+    imports: [ProductsModule, UsersModule, CategoriesModule],
     providers: [],
 })
 export class WarehouseModule {}
