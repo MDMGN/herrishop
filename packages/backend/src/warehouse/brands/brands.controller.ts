@@ -24,7 +24,7 @@ export class BrandsController {
   async findAll() {
     const brands = await this.brandsService.findAll();
     return {
-      error: true,
+      error: false,
       status: 200,
       data: brands,
     };
