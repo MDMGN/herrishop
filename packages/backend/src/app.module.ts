@@ -3,6 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { WarehouseModule } from './warehouse/warehouse.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Product } from './warehouse/products/entities/product.entity';
+import { Category } from './warehouse/categories/entities/category.entity';
+import { Brand } from './warehouse/brands/entities/brand.entity';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -12,8 +15,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     username: 'root',
     password: '',
     database: 'dbherrishop',
+    logger: 'debug',
+    logging: 'all',
     entities: [
-        __dirname + '/../**/*.entity{.ts,.js}',
+      Product,
+      Category,
+      Brand
     ],
     synchronize: false
   }),
