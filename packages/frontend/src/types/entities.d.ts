@@ -14,6 +14,8 @@ type Product={
     unit_price: number,
     description: string,
     image: null | string;
+    brand: Brand
+    category: Category
 }
 
 type ProductCart = Product &{ amount: number };
@@ -33,7 +35,12 @@ type User={
     token?: string
 }
 
-type Categories={
+type Category={
+    id: number,
+    name: string
+}
+
+type Brand={
     id: number,
     name: string
 }

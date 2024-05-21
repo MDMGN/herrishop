@@ -6,9 +6,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './warehouse/products/entities/product.entity';
 import { Category } from './warehouse/categories/entities/category.entity';
 import { Brand } from './warehouse/brands/entities/brand.entity';
+import { ConfigModule } from '@nestjs/config'
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
+  imports: [
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRoot({
     type: 'mysql',
     host: 'localhost',
     port: 3306,

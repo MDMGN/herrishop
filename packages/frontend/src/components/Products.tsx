@@ -1,4 +1,3 @@
-import { type Product } from "../types/entities";
 import { CardProduct } from "./CardProduct";
 
 type Props={

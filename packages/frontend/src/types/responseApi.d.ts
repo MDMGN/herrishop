@@ -32,9 +32,12 @@ type reponseApiProducts={
 
 type reponseApiCategories={
     error: boolean,
-    count: int,
-    current_page: int,
-    next_page: int | null,
-    total_pages: int,
-    data: Categories[]
+    status: number,
+    data: Category[]
+}
+
+type reponseApiBrands={
+    error: boolean,
+    status: number,
+    data: Brand[]
 }
