@@ -14,7 +14,7 @@ export class Product {
     customer_id: number;
 
     
-    @Column('decimal')
+    @Column('decimal', { precision: 10, scale: 2,nullable: false })
     unit_price: number;
 
     @Column('smallint')
