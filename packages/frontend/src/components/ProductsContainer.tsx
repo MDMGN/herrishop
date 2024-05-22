@@ -1,3 +1,4 @@
+import { Product } from "../types/entities";
 import { Products } from "./Products";
 
 type Props={
@@ -5,7 +6,7 @@ type Props={
 }
 
 export function ProductsContainer( props: Props) {
- const {products} = props
+ const { products} = props
 
   return (
       <Products products={products} />

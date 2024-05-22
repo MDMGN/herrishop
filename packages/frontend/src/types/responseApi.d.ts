@@ -1,18 +1,18 @@
 import { Product } from "./entities"
 
-type reponseApiRegister={
+export type reponseApiRegister={
     error : boolean,
     code : number,
     message: string | ErrorMessage,
 }
 
-type ErrorMessage={
+export type ErrorMessage={
     error_message: string,
     error: Array<Record<string,string>>
 }
 
 
-type reponseApiLogin={
+export type reponseApiLogin={
     error: boolean,
     message?: string | ErrorMessage,
     results?: {
@@ -21,7 +21,7 @@ type reponseApiLogin={
     }
 }
 
-type reponseApiProducts={
+export type reponseApiProducts={
     error: boolean,
     count: int,
     current_page: int,
@@ -30,14 +30,20 @@ type reponseApiProducts={
     data: Product[]
 }
 
-type reponseApiCategories={
+export type reponseApiCategories={
     error: boolean,
     status: number,
     data: Category[]
 }
 
-type reponseApiBrands={
+export type reponseApiBrands={
     error: boolean,
     status: number,
     data: Brand[]
+}
+
+export type responseApiProduct={
+    error: boolean,
+    status: number,
+    data: Brand
 }

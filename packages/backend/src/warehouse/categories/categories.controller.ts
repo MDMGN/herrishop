@@ -7,12 +7,15 @@ export class CategoriesController {
 
   @Get()
   async findAll(){
+    
     const categories= await this.categoriesService.findAll()
+
     return{
       error: false,
       status: 200,
       data: categories
     }
+    
   }
 }
   

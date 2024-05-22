@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { ajax } from "../helpers"
 import type { reponseApiBrands, reponseApiCategories  } from "../types/responseApi"
 import { URL_BRANDS , URL_CATEGORIES } from "../api/API_HERRISHOP"
+import { Brand, Category } from "../types/entities"
 
 type Filter={
   brands: Array<Brand["id"]>,
@@ -9,14 +10,15 @@ type Filter={
 }
 
 type Props={
-  handleFilter: (filter: Filter )=> void
+  handleFilter: (filter: Filter )=> void,
+  brandsFilters: Array<Brand["id"]>
 }
 
 export  function Filters(props: Props) {
     const [categories, setCategories]= useState<Category[]>([])
     const [ brands, setBrands]= useState<Brand[]>([])
     const [ filter, setFilter ] = useState({ brands: [], category: 0 } as Filter)
-    const {handleFilter} = props
+    const { handleFilter, brandsFilters } = props
 
     useEffect(()=>{
         ajax({
@@ -54,10 +56,12 @@ export  function Filters(props: Props) {
             {categories.map(category=> <li key={category.id} 
             className="text-md my-3 cursor-pointer hover:font-bold hover:text-xl"
             data-name="category"
-            onClick={({ target })=>{
+            onClick={e=>{
+              const $li = e.target as HTMLElement
+              const name= $li.dataset.name ?? ''
                   setFilter({
                     ...filter,
-                   [target.dataset.name]: category.id
+                   [name]: category.id 
                   })
             }} >
               {category.name}
@@ -72,6 +76,7 @@ export  function Filters(props: Props) {
                   type="checkbox" 
                   value={brand.id}
                   name="brands"
+                  className={ !brandsFilters.includes(brand.id) ? 'opacity-0': ''}
                   onChange={({ target })=>{
                     setFilter((oldValue)=> {
                       const newValue = filter.brands.filter( brand => brand !== +target.value )

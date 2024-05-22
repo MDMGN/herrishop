@@ -2,7 +2,8 @@ import { useContext, useState } from "react"
 import { UserContext } from "../contexts/UserContext"
 import { ajax } from "../helpers"
 import { URL_LOGIN } from "../api/API_HERRISHOP"
-import {type reponseApiLogin } from "../types/responseApi"
+import type { reponseApiLogin } from "../types/responseApi"
+import { User } from "../types/entities"
 
 
 export default function useLogin() {

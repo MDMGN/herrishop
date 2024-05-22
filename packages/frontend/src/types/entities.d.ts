@@ -1,11 +1,11 @@
-type Login={
+export type Login={
     error: boolean,
     results: {
         user: User,
         orders:Array
     }
 }
-type Product={
+export type Product={
     id: number,
     name: string,
     customer_id: number,
@@ -18,13 +18,13 @@ type Product={
     category: Category
 }
 
-type ProductCart = Product &{ amount: number };
+export type ProductCart = Product &{ amount: number };
 
-type Cart = {
+export type Cart = {
     [key: Product["id"]] : ProductCart
 }
 
-type User={
+export type User={
     id: number,
     password: string,
     surname: string,
@@ -35,12 +35,12 @@ type User={
     token?: string
 }
 
-type Category={
+export type Category={
     id: number,
     name: string
 }
 
-type Brand={
+export type Brand={
     id: number,
     name: string
 }

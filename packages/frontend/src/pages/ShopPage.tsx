@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import { Filters, ProductsContainer } from "../components";
-import { ajax } from "../helpers";
-import { URL_PRODUCTS } from "../api/API_HERRISHOP";
-import { reponseApiProducts } from "../types/responseApi";
+import useShop from "../hooks/useShop";
+import { Brand, Category } from "../types/entities";
 
 type Filter={
   brands: Array<Brand["id"]>,
@@ -10,24 +8,7 @@ type Filter={
 }
 
 export function ShopPage() {
-  const [ products, setProducts ] = useState([] as Product[])
-  const [ productsFilter, setProductsFilter ] = useState([] as Product[])
-
-  useEffect(()=>{
-    ajax({
-      url: URL_PRODUCTS,
-      method:"GET",
-      cbSuccess: (response:reponseApiProducts)=>{
-        const {data: products} = response
-        if(!response.error) 
-            setProducts([...products])
-          setProductsFilter([...products])
-      },  
-      cbError:(error)=>{
-        console.log(error)    
-      }
-    })
-  },[])
+  const {brandsFilters, products, setProductsFilter, productsFilter} = useShop()
 
   const handleFilter=( filter : Filter  )=>{
     const { brands, category } = filter
@@ -37,7 +18,7 @@ export function ShopPage() {
 
   return (
     <section className="w-full p-16  h-screen grid grid-cols-[250px,1fr]">
-        <Filters handleFilter= {handleFilter}  />
+        <Filters handleFilter= { handleFilter } brandsFilters={brandsFilters}  />
         <ProductsContainer products={ productsFilter} />
     </section>
   )

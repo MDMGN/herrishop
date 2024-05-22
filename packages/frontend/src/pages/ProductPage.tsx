@@ -1,55 +1,16 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import type { Product } from "../types/entities";
-import { ajax } from "../helpers";
-import { NavLink, useParams } from "react-router-dom";
-import { UserContext } from "../contexts/UserContext";
-import {Toaster, toast} from 'sonner'
-import { URL_PRODUCTS } from "../api/API_HERRISHOP";
+
+import { NavLink } from "react-router-dom";
+import { Toaster } from 'sonner'
+import useProduct from "../hooks/useProduct";
 
 export function ProductPage() {
-  const {id} = useParams<{id: string}>();
-  const [ product, setProduct] = useState({} as Product);
-  const {cart, setCart} = useContext(UserContext)
-  const amountRef = useRef<HTMLInputElement | null>(null)
-
-  
-  useEffect(()=>{
-    ajax({
-      url: `${URL_PRODUCTS}/${id}`,
-      cbSuccess: ({error,data})=>{
-        if(!error){
-          setProduct(data)
-        }
-      },
-      cbError: ()=>{},
-      method: "GET",
-    })
-  },[])
-
-  const addCart=():void=>{
-    const amount=Number(amountRef.current?.value)
-      
-        if(!cart?.hasOwnProperty(product.id)){
-            if(amount <= 0){
-              amountRef.current?.select()
-              return
-            }
-          const newValue={...cart,[product.id]:{...product,amount}};
-          setCart({...newValue})
-          localStorage.setItem("cart",JSON.stringify(newValue))
-          toast.success("Producto se ha agregado al carrito")
-          return
-        }
-        const { [product.id] : deleteValue, ...restValues } = cart
-        setCart({...restValues})
-        localStorage.setItem("cart",JSON.stringify(restValues))
-        toast.error("El producto se ha elimnado del carrito")
-  }
+  const {addCart,product, cart, amountRef} = useProduct()
 
   const hasStock= product.unit_stock > 0
   const isAdded= cart.hasOwnProperty(product.id)
+  
   return (
-      <section className="p-5 md:p-16 my-7 text-lg">
+    <section className="min-h-screen bg-gray-300">
         <Toaster richColors />  
         { Object.keys(product).length !== 0 ?
           (<>
@@ -58,7 +19,7 @@ export function ProductPage() {
                 <span>/</span>
                 <NavLink to={"/shop"}>Shop</NavLink>
                 <span>/</span>
-                <NavLink to={`/product/${id}`}>{product.name}</NavLink>
+                <NavLink to={`/product/${product.id}`}>{product.name}</NavLink>
               </div>
             <article className="flex flex-wrap gap-5 w-full h-auto">
               <img src={product.image ?? ''} className="h-full w-5" />
@@ -70,7 +31,7 @@ export function ProductPage() {
                   </span>
                 <h1 className="center my-10 font-bold text-[30px] text-center">{ product.name }</h1>
                 <span 
-                    className={`relative  after:w-3 after:absolute after:h-3 after:left-[-15px] after:top-[5px] after:rounded-lg ${hasStock ? 'after:bg-green-500' : 'after:bg-red-500'}`}>
+                    className={`relative  after:w-3 after:absolute after:h-3 after:left-[-15px] after:top-[5px] after:rounded-lg ${ hasStock ? 'after:bg-green-500' : 'after:bg-red-500'}`}>
                     Stock
                 </span>
                 <p>{product.description}</p>
