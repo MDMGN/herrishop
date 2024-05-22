@@ -1,16 +1,57 @@
-
-import { NavLink } from "react-router-dom";
-import { Toaster } from 'sonner'
-import useProduct from "../hooks/useProduct";
+import { useContext, useEffect, useRef, useState } from "react";
+import type { Product } from "../types/entities";
+import { ajax } from "../helpers";
+import { NavLink, useParams } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
+import {Toaster, toast} from 'sonner'
+import { URL_PRODUCTS } from "../api/API_HERRISHOP";
+import { responseApiProduct } from "../types/responseApi";
 
 export function ProductPage() {
-  const {addCart,product, cart, amountRef} = useProduct()
+  const {id} = useParams<{id: string}>();
+  const [ product, setProduct] = useState({} as Product);
+  const {cart, setCart} = useContext(UserContext)
+  const amountRef = useRef<HTMLInputElement | null>(null)
+
+  
+  useEffect(()=>{
+    if (!id) return
+    ajax({
+      url: `${URL_PRODUCTS}/${id}`,
+      cbSuccess: ({ data:product, error }: responseApiProduct)=>{
+        if(!error){
+          setProduct(product)
+        }
+      },
+      cbError: ()=>{},
+      method: "GET",
+    })
+  },[])
+
+  const addCart=():void=>{
+    const amount=Number(amountRef.current?.value)
+      
+        if(!cart?.hasOwnProperty(product.id)){
+            if(amount <= 0){
+              amountRef.current?.select()
+              return
+            }
+          const newValue={...cart,[product.id]:{...product,amount}};
+          setCart({...newValue})
+          localStorage.setItem("cart",JSON.stringify(newValue))
+          toast.success("Producto se ha agregado al carrito")
+          return
+        }
+        const { [product.id] : deleteValue, ...restValues } = cart
+        setCart({...restValues})
+        localStorage.setItem("cart",JSON.stringify(restValues))
+        toast.error("El producto se ha elimnado del carrito")
+  }
 
   const hasStock= product.unit_stock > 0
   const isAdded= cart.hasOwnProperty(product.id)
-  
   return (
-    <section className="min-h-screen bg-gray-300">
+      <section className="p-5 md:p-16 my-7 text-lg">
         <Toaster richColors />  
         { Object.keys(product).length !== 0 ?
           (<>
@@ -19,7 +60,7 @@ export function ProductPage() {
                 <span>/</span>
                 <NavLink to={"/shop"}>Shop</NavLink>
                 <span>/</span>
-                <NavLink to={`/product/${product.id}`}>{product.name}</NavLink>
+                <NavLink to={`/product/${id}`}>{product.name}</NavLink>
               </div>
             <article className="flex flex-wrap gap-5 w-full h-auto">
               <img src={product.image ?? ''} className="h-full w-5" />
@@ -37,7 +78,7 @@ export function ProductPage() {
                 <p>{product.description}</p>
                 <div className="flex justify-evenly">
                   <label htmlFor="qyt">Qyt</label>
-                  <input type="number" id="qyt" className="border-5 border-black" min={0} max={product.unit_stock} ref={amountRef}/>
+                  <input type="number" id="qyt" className="border-5 border-black" min={1} max={product.unit_stock} ref={amountRef}/>
                 </div>
                 <button 
                     className={`${ isAdded ? 'bg-red-500' : 'bg-green-500'} p-5 text-white font-bold text-lg hover:opacity-[.8]`}

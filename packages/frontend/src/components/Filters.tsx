@@ -1,7 +1,4 @@
-import { useEffect, useState } from "react"
-import { ajax } from "../helpers"
-import type { reponseApiBrands, reponseApiCategories  } from "../types/responseApi"
-import { URL_BRANDS , URL_CATEGORIES } from "../api/API_HERRISHOP"
+import useFilter from "../hooks/useFilter"
 import { Brand, Category } from "../types/entities"
 
 type Filter={
@@ -15,46 +12,20 @@ type Props={
 }
 
 export  function Filters(props: Props) {
-    const [categories, setCategories]= useState<Category[]>([])
-    const [ brands, setBrands]= useState<Brand[]>([])
-    const [ filter, setFilter ] = useState({ brands: [], category: 0 } as Filter)
-    const { handleFilter, brandsFilters } = props
-
-    useEffect(()=>{
-        ajax({
-          url: URL_BRANDS,
-          method: "GET",
-          cbSuccess: (resp: reponseApiBrands)=>{
-              const { data: brands } =resp
-              setBrands([...brands])
-          },
-          cbError: (resp)=>{}
-        })
-    },[])
-
-    useEffect(()=>{
-      ajax({
-        url: URL_CATEGORIES,
-        method: "GET",
-        cbSuccess: (resp:reponseApiCategories)=>{
-            const { data: categories } =resp
-            setCategories([...categories])
-        },
-        cbError: (resp)=>{}
-      })
-  },[])
-
-  useEffect(()=>{
-    handleFilter(filter)
-  },[filter])
+  const { brands, categories, brandsFilters, setFilter, filter } = useFilter(props)
     
   return (
    <aside>
      <div>
-        <p>Categories</p>
+        <p 
+        className="text-md my-3 cursor-pointer hover:font-bold hover:scale-5"
+        onClick={()=> setFilter((oldValue)=>({...oldValue, category: 0}))}
+        >
+          Categories
+        </p>
         <ul className="px-5 my-5">
             {categories.map(category=> <li key={category.id} 
-            className="text-md my-3 cursor-pointer hover:font-bold hover:text-xl"
+            className="text-md my-3 cursor-pointer hover:font-bold hover:scale-5"
             data-name="category"
             onClick={e=>{
               const $li = e.target as HTMLElement
