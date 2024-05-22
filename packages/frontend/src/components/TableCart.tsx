@@ -1,10 +1,10 @@
-import { useCallback, useContext } from "react"
+import { useContext } from "react"
 import { UserContext } from "../contexts/UserContext"
 import { CartItem } from "./CartItem"
 
 export  function TableCart() {
 
-  const { cart, setCart } = useContext(UserContext)
+  const { cart } = useContext(UserContext)
 
 
   return (
