@@ -14,11 +14,15 @@ class AuthRepository{
             algorithm: 'HS256',
             secret: 'SERECRET:API_KEY'
         })
+
         return jwt
     }
 
-    singUp(){   
-        
+    singUp(){
+
     }
 
+    async verify(jwt: string){
+        return await this.jwtService.verifyAsync<Auth>(jwt)
+    }
 }
