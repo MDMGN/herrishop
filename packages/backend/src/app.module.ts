@@ -7,7 +7,6 @@ import { Product } from './warehouse/products/entities/product.entity';
 import { Category } from './warehouse/categories/entities/category.entity';
 import { Brand } from './warehouse/brands/entities/brand.entity';
 import { ConfigModule } from '@nestjs/config'
-import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -28,16 +27,9 @@ import { JwtModule } from '@nestjs/jwt';
     ],
     synchronize: false
   }),
-  JwtModule.register({
-    secret: 'SERECRET:API_KEY',
-    signOptions: {
-      algorithm: 'HS256',
-      expiresIn: '30d',
-    },
-  }),
-  WarehouseModule
-],
+    WarehouseModule
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule { }

@@ -1,8 +1,9 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
+@Entity({name: 'users'})
 export class User {
-    @PrimaryGeneratedColumn("increment")
-    id:number;
+    @PrimaryGeneratedColumn('uuid')
+    id:string;
     @Column("varchar", {length: 50})
     email:string;
     

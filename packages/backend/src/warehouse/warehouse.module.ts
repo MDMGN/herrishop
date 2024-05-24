@@ -12,6 +12,6 @@ import { AuthModule } from './auth/auth.module';
         CategoriesModule, 
         BrandsModule, 
         AuthModule
-    ],
+    ]
 })
 export class WarehouseModule {}

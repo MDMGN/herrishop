@@ -1,33 +1,29 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { Injectable, Logger } from '@nestjs/common';
 import { AuthRepository } from 'src/repository/auth.service';
+import { JwtService } from '@nestjs/jwt';
+import { Auth } from 'src/models/auth.model';
 
 @Injectable()
 export class AuthService {
-  constructor(private authRepository: AuthRepository){}
+
+  private logger=new Logger() ;
+  constructor(
+    private jwtService: JwtService
+  ){}
   
-  create(createAuthDto: CreateAuthDto) {
-    return this.authRepository.singIn({
-      email: 'michaelmdvr@gmail.com',
-      password: '@Mdmgn123xz',
-      name: 'MDMGN'
-    })
-  }
+  getAccesToken(auth: Auth) {
 
-  findAll() {
-    return `This action returns all auth`;
-  }
+    try{
+      const accessToken = this.jwtService.sign({
+        user_name: auth.username,
+        user_email: auth.email,
+      })
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
-
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
+      return{
+        access_token: accessToken
+      }
+    }catch(error){
+        this.logger.error(error)
+    }
   }
 }

@@ -1,34 +1,28 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Injectable } from '@nestjs/common';
-import { AuthService } from './auth.service';
+import { Controller, Get, Body, UnauthorizedException, HttpException, Query} from '@nestjs/common';
 import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { Repository } from 'typeorm';
+import { User } from '../users/entities/user.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    @InjectRepository(User)
+    private readonly userRepository:Repository<User>,
+    private readonly authService:AuthService
+  ) {}
 
   @Get()
-  create(@Body() createAuthDto: CreateAuthDto) {
-    return this.authService.create(createAuthDto);
+  async create(@Query() createAuthDto: CreateAuthDto) {
+    const user= await this.userRepository.findOneBy({email: createAuthDto.email}) 
+
+    if(!user){
+      throw new HttpException('Unathorized',401)
+    }
+    return this.authService.getAccesToken(createAuthDto);
   }
 
-  @Get()
-  findAll() {
-    return this.authService.findAll();
-  }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.authService.findOne(+id);
-  }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.authService.remove(+id);
-  }
 }
