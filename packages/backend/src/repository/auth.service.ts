@@ -5,17 +5,11 @@ import { Auth } from "src/models/auth.model";
 
 
 @Injectable()
-class AuthRepository{
+export class AuthRepository{
     constructor(private jwtService:JwtService){}
 
     singIn(payload: Auth){
-        const jwt= this.jwtService.sign(payload,{
-            expiresIn: '30d',
-            algorithm: 'HS256',
-            secret: 'SERECRET:API_KEY'
-        })
-
-        return jwt
+        return this.jwtService.sign(payload)
     }
 
     singUp(){

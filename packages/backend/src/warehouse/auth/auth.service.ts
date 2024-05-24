@@ -1,12 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
+import { AuthRepository } from 'src/repository/auth.service';
 
 @Injectable()
 export class AuthService {
-  constructor(){}
+  constructor(private authRepository: AuthRepository){}
+  
   create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
+    return this.authRepository.singIn({
+      email: 'michaelmdvr@gmail.com',
+      password: '@Mdmgn123xz',
+      name: 'MDMGN'
+    })
   }
 
   findAll() {
