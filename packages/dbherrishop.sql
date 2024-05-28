@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-05-2024 a las 22:00:42
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 28-05-2024 a las 20:24:43
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -156,7 +156,7 @@ INSERT INTO `products` (`id`, `name`, `customer_id`, `category_id`, `brand_id`, 
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id` char(36) NOT NULL,
   `name` varchar(20) NOT NULL,
   `password` varchar(60) NOT NULL,
   `surname` varchar(20) NOT NULL,
@@ -166,16 +166,17 @@ CREATE TABLE `users` (
   `birthdate` date NOT NULL,
   `token` varchar(250) DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 0,
-  `role` varchar(20) NOT NULL
+  `role` varchar(20) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `password`, `surname`, `address`, `email`, `zip_code`, `birthdate`, `token`, `status`, `role`) VALUES
-(34, 'Darren', '@MDmgn123xz', 'Vargas Ramirez', 'Pinutegi 5, Ático A', 'michaelmdvra@gmail.com', '20160', '1999-04-07', NULL, 0, ''),
-(35, 'Darren Michael', '$2y$10$JrsaxIGgtU0V0N7KoV./D.XEwZlny6mJzZRCW218Bi8wNFtRSCv7O', 'Vargas Ramirez', 'Pinutegi 5 Ático A', 'michaelmdvr@gmail.com', '20160', '1999-07-04', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MDk5MTkyNzQsImV4cCI6IjE3MTI1MTEyNzQiLCJkYXRhIjp7ImlkIjozNSwiZW1haWwiOiJtaWNoYWVsbWR2ckBnbWFpbC5jb20ifX0.UKUeCPjOrPQXAceJEzqbIJiGe5iqwgzmcnX8mCOzSCY', 1, 'USER_ROLE');
+INSERT INTO `users` (`id`, `name`, `password`, `surname`, `address`, `email`, `zip_code`, `birthdate`, `token`, `status`, `role`, `created_at`, `updated_at`) VALUES
+('11304d35-e149-458d-8771-eb966a57f229', 'Darren', '$2b$10$yL.5TbuaZ7dFyELN/gVB/.dImFayxl6gLiIj30/Ttu5t8BFr.uzlK', 'Vargas Ramirez', 'Pinutegi', 'michaelmdvr@gmail.com', '', '1999-04-07', NULL, 0, '', '2024-05-28 18:22:19', NULL);
 
 --
 -- Índices para tablas volcadas
