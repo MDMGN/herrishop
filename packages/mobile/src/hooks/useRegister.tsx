@@ -1,6 +1,4 @@
 import { useState } from "react"
-import { User } from "../types/user"
-import { reponseApiRegister } from "../types/responseApi"
 import { ajax } from "../helpers"
 import { URL_REGISTER } from "../api/API_HERRISHOP"
 
@@ -21,6 +19,8 @@ export default function useRegister() {
           method: 'POST',
           cbError: setMessage,
           cbSuccess: (response: reponseApiRegister)=>{
+            console.log(response);
+            return;
             setError(response?.error ?? false)
             if(response.error){
               setMessage((oldValue)=>{

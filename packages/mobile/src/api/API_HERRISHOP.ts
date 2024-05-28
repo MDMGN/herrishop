@@ -1,9 +1,9 @@
-const host = '192.168.1.246:3000'
-const BASE_URL = `http://${host}/api`
+const host = '192.168.37.158:3000'
+const BASE_URL = `http://${host}/api/v1`
 
 const URL_REGISTER= `${BASE_URL}/users`
 
-const URL_LOGIN = `${BASE_URL}/login`
+const URL_LOGIN = `${BASE_URL}/auth`
 
 export{
     URL_LOGIN,

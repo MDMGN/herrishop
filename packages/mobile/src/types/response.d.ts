@@ -1,4 +1,4 @@
-import { User } from "./user"
+import { User } from "./entities"
 
 type Login={
     error: boolean,

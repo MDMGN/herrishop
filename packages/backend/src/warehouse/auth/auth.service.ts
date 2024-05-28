@@ -6,11 +6,8 @@ import { Auth } from 'src/models/auth.model';
 export class AuthService {
 
   private logger=new Logger() ;
-  constructor(
-    private jwtService: JwtService
-  ){}
-
-
+  
+  constructor(private readonly jwtService: JwtService){}
   
   public sigin(auth: Auth) {
 

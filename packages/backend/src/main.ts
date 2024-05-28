@@ -7,6 +7,6 @@ async function bootstrap() {
   app.enableCors()
   app.setGlobalPrefix(`api/${process.env.API_VERSION || 'v1'}`)
   app.useGlobalPipes(new ValidationPipe())
-  await app.listen(3000);
+  await app.listen(3000,'0.0.0.0');
 }
 bootstrap();

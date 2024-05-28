@@ -15,13 +15,13 @@ export class AuthController {
 
   @Get()
   async create(@Query() createAuthDto: CreateAuthDto) {
-    const user= await this.userRepository.findOneBy( { email: createAuthDto.email } ) 
+   /*  const user= await this.userRepository.findOneBy( { email: createAuthDto.email } ) 
 
     if(!user){
       throw new HttpException('Unathorized',401)
-    }
+    } */
 
-    const token = this.authService.getAccesToken(createAuthDto)
+    const token = this.authService.sigin(createAuthDto)
     return this.authService.verifyAccessToken(token)
   }
 

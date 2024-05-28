@@ -27,6 +27,9 @@ export function UserProvider({children}:Props) {
               ])
           },
           cbSuccess:(response:reponseApiLogin)=>{
+
+            console.log(response)
+            return;
             if(!response.error){
                 setUser((user)=>response.results?.user ?? user)
                 setIsLogin(true)
