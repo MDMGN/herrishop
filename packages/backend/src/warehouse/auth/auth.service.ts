@@ -15,7 +15,6 @@ export class AuthService {
 
     try{
       const accessToken = this.jwtService.sign({
-        user_name: auth.username,
         user_email: auth.email,
       })
 
