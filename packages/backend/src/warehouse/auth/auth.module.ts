@@ -11,7 +11,7 @@ import { User } from '../users/entities/user.entity';
     JwtModule.register({
       secret: 'SERECRET:API_KEY',
       signOptions: {
-        algorithm: 'RS256',
+        algorithm: 'HS256',
         expiresIn: '30d',
       }
     })

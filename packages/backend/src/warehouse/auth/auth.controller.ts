@@ -1,4 +1,4 @@
-import { Controller, Get, Body, UnauthorizedException, HttpException, Query} from '@nestjs/common';
+import { Controller, Get, HttpException, Query} from '@nestjs/common';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { Repository } from 'typeorm';
 import { User } from '../users/entities/user.entity';
@@ -15,12 +15,14 @@ export class AuthController {
 
   @Get()
   async create(@Query() createAuthDto: CreateAuthDto) {
-    const user= await this.userRepository.findOneBy({email: createAuthDto.email}) 
+    const user= await this.userRepository.findOneBy( { email: createAuthDto.email } ) 
 
     if(!user){
       throw new HttpException('Unathorized',401)
     }
-    return this.authService.getAccesToken(createAuthDto);
+
+    const token = this.authService.getAccesToken(createAuthDto)
+    return this.authService.verifyAccessToken(token)
   }
 
 
