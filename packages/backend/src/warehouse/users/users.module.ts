@@ -11,33 +11,34 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports : [TypeOrmModule.forFeature([User]),
-  MailerModule.forRootAsync({
-    useFactory: ()=>(
-      {
-        transport:{
-          host: 'smtp.gmail.com',
-          service: 'gmail',
-          port: 465,
-          secure: true,
-          auth: {
-            user: process.env.EMAIL_USERNAME,
-            pass : process.env.EMAIL_PASSWORD
+  imports : [
+    TypeOrmModule.forFeature([User]),
+    MailerModule.forRootAsync({
+      useFactory: ()=>(
+        {
+          transport:{
+            host: 'smtp.gmail.com',
+            service: 'gmail',
+            port: 465,
+            secure: true,
+            auth: {
+              user: process.env.EMAIL_USERNAME,
+              pass : process.env.EMAIL_PASSWORD
+            },
           },
-        },
-        defaults:{
-          from: `"No reply" <herrisho@herrishop.com>`
-        },
-        template: {
-          dir: join(__dirname,'../../templates'),
-          adapter: new HandlebarsAdapter(),
-          options: {
-            strict: true
-          }
-        },
-      }
-    )
-  }),
+          defaults:{
+            from: `"No reply" <herrishop@herrishop.com>`
+          },
+          template: {
+            dir: join(__dirname,'../../templates'),
+            adapter: new HandlebarsAdapter(),
+            options: {
+              strict: true
+            }
+          },
+        }
+      )
+    }),
   ConfigModule,
   JwtModule.register({
     secret: 'SERECRET:API_KEY',

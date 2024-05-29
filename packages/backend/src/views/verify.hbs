@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    *,
+    *::after,
+    *::before{
+        box-sizing: border-box;
+    }
+    html{
+        font-size: 20px;
+    }
+     /* Token alert */
+
+  .alert-token{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: .7;
+    height: 72vh;
+    margin: 10px auto;
+  }
+  .alert-token p{
+    text-align: center;
+    padding: 20px;
+    color: #fff;
+    border-radius: 20px;
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.9);
+  }
+</style>
+<body>
+   <main>
+    <div class="alert-token">
+        <p style="background-color: {{#if isSuccess}} green {{else}} red {{/if}}">
+           {{message}}
+        </p>
+    </div>
+</main>
+</body>
+</html>

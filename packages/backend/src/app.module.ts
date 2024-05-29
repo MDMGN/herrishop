@@ -10,6 +10,8 @@ import { ConfigModule } from '@nestjs/config'
 import { User } from './warehouse/users/entities/user.entity';
 import { NestApplication } from '@nestjs/core';
 import { LoggerMiddleware } from './middlewares/logger/logger.middleware';
+import { AuthService } from './warehouse/auth/auth.service';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -33,10 +35,18 @@ import { LoggerMiddleware } from './middlewares/logger/logger.middleware';
     ],
     synchronize: false
   }),
+  JwtModule.register({
+    secret: 'SERECRET:API_KEY',
+    signOptions: {
+      algorithm: 'HS256',
+      expiresIn: '30d',
+    }
+  }),
+  TypeOrmModule.forFeature([User]),
     WarehouseModule
   ],
   controllers: [AppController],
-  providers: [AppService]
+  providers: [AppService, AuthService]
 })
 export class AppModule { 
   configure(consumer: MiddlewareConsumer){

@@ -14,11 +14,13 @@ export class UsersController {
    
 
     if(!newUser) throw new UnprocessableEntityException();
+
     return {
       error: false,
       status: 200,
       message: "Hemos enviado un acceso temporal a tu correo eléctronico"
     }
+    
   }
 
   @Get()
