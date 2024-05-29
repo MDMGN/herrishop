@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ajax } from "../helpers"
+import { ajax, convertDateToISO } from "../helpers"
 import { URL_REGISTER } from "../api/API_HERRISHOP"
 
 const headersList = {
@@ -7,41 +7,37 @@ const headersList = {
 }
 
 export default function useRegister() {
-    const [user, setUser] = useState({} as User)
-    const [message, setMessage] = useState('')
+  const [user, setUser] = useState({} as User)
+  const [message, setMessage] = useState('')
 
-    const [error, setError] = useState(false)
-
-    const resgistrar=()=>{
-        ajax({
-          url: URL_REGISTER,
-          data: user,
-          method: 'POST',
-          cbError: setMessage,
-          cbSuccess: (response: reponseApiRegister)=>{
-            console.log(response);
-            return;
-            setError(response?.error ?? false)
-            if(response.error){
-              setMessage((oldValue)=>{
-                return (typeof response.message !== 'string') ?
-                        Object.values(response.message.error).reduce((acc,msg)=> acc+=msg+'\n\n' ,'')
-                        : oldValue
-              })
-            }else{
-              setMessage((oldValue)=> typeof response.message === 'string' ? response.message : oldValue)
-            }
-        }})
+  const [error, setError] = useState(false)
+  const resgistrar = () => {
+    ajax({
+      url: URL_REGISTER,
+      data: { ...user, birthdate: convertDateToISO(user.birthdate) },
+      method: 'POST',
+      cbSuccess: (response: ReponseApiRegister) => {
+        setMessage(() => response.message)
+        setError(false)
+      },
+      cbError: (res: ResponseError) => {
+        console.log(res)
+        setMessage(() => res.message instanceof Array ?
+          res.message.reduce((acc, current) => acc += current + '\n\n', '') : res.message
+        )
+        setError(true)
       }
+    })
+  }
 
-    const onChange=(key:string,value:string):void=>{
-        setUser((current:User)=>  ({...current,[key]:value.trim()}))
-    }
+  const onChange = (key: string, value: string): void => {
+    setUser((current: User) => ({ ...current, [key]: value.trim() }))
+  }
 
-    return {
+  return {
     onChange,
     resgistrar,
     message,
     error
-    }
+  }
 }

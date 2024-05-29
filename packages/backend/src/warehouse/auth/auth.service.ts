@@ -38,13 +38,13 @@ export class AuthService {
 
 
     const user= await this.userRepository.findOne({ where: {email: auth.email }})
-    if(user) {
+    if(user && user.status) {
       const isMatchPassword=await bcrypt.compare(auth.password,user.password)
       if(isMatchPassword){
         return this.getAccessToken(auth.email);
       }
     }
-      throw new UnauthorizedException('La contraseña o email es incorrecta');
+      throw new UnauthorizedException('La contraseña o email es incorrecta o tu email no ha sido confirmado');
   }
 
   public verifyAccessToken(token: string){

@@ -1,12 +1,13 @@
-type reponseApiRegister={
+type ReponseApiRegister={
     error : boolean,
     code : number,
-    message: string | ErrorMessage,
+    message: string,
 }
 
-type ErrorMessage={
-    error_message: string,
-    error: Array<Record<string,string>>
+type ResponseError={
+    error: string,
+    statusCode:number,
+    message: string | string[]
 }
 
 

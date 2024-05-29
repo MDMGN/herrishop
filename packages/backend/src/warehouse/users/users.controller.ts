@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UnprocessableEntityException, Logger } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UnprocessableEntityException, Logger, Query } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -10,6 +10,7 @@ export class UsersController {
   private logger = new Logger();
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
+    this.logger.debug(createUserDto)
     const newUser=await this.usersService.create(createUserDto);
    
 

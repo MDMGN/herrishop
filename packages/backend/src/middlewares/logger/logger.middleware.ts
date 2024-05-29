@@ -4,10 +4,10 @@ import { Response, Request } from 'express';
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: () => void) {
-    const {originalUrl, method} = req
+    const {originalUrl, method } = req
     const USER_AGENT= req.headers['user-agent'] || ''
     
-    console.info(`${originalUrl} ${USER_AGENT} ${method}`);
+    console.info(`${originalUrl} ${USER_AGENT} ${method} ${JSON.stringify(req.query)}`);
     next();
   }
 }
