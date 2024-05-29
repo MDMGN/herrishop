@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, Injectable, Logger } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -7,17 +7,17 @@ import { Repository } from 'typeorm'
 import { MailerService } from '@nestjs-modules/mailer';
 import * as bcrypt from 'bcrypt';
 import { AuthService } from '../auth/auth.service';
-import { EmailTemplate } from 'src/templates/email.template';
 import { request } from 'express';
+import { MailContext } from 'src/models/mail.model';
 
 @Injectable()
 export class UsersService {
-
+private logger= new Logger()
   constructor(
     @InjectRepository(User)
     private readonly userRepository:Repository<User>,
     private readonly mailService: MailerService,
-    private readonly authService:AuthService
+    private readonly authService:AuthService,
   ){}
   
   async create(createUserDto: CreateUserDto) {
@@ -33,8 +33,8 @@ export class UsersService {
     const hashPassword = await bcrypt.hash(newUser.password, saltOrRounds);
     newUser.password = hashPassword;
     const token = this.authService.sigin({email: newUser.email})
-    this.sendMail('Herrishop <herrishop@herishop.com>',newUser.email,'Confirmar el registro',EmailTemplate(request.headers.host,'confirm',token))
-
+    const host = '192.168.56.1:3000'
+   await this.sendMail('Herrishop <herrishop@herishop.com>',newUser.email,'Confirmar el registro',{host, token, site: 'verify'})
     return await this.userRepository.save(newUser);
   }
 
@@ -54,13 +54,24 @@ export class UsersService {
     return `This action removes a #${id} user`;
   }
 
-  private sendMail(from:string, to:string, subject:string, message:string) {
+  private async sendMail(from:string, to:string, subject:string, props: MailContext) {
+    const {host,site,token} = props
+    try{
 
-    this.mailService.sendMail({
-      from,
-      to,
-      subject,
-      text: message,
-    });
+      return await this.mailService.sendMail({
+        from,
+        to,
+        subject,
+        template: './email.template.hbs',
+        context:{
+          token,
+          site,
+          host
+        },
+      });
+
+    }catch(e){
+      this.logger.error(e);
+    }
   }
 }

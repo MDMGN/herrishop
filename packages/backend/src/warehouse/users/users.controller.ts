@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UnprocessableEntityException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UnprocessableEntityException, Logger } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -7,18 +7,17 @@ import { UpdateUserDto } from './dto/update-user.dto';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-
+  private logger = new Logger();
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
     const newUser=await this.usersService.create(createUserDto);
    
 
     if(!newUser) throw new UnprocessableEntityException();
-
     return {
       error: false,
       status: 200,
-      message: '¡Registro exitoso! Te has registrado correctamente." : "¡Oops! Token Invalido. No se ha podido completar tu registro.'
+      message: "Hemos enviado un acceso temporal a tu correo eléctronico"
     }
   }
 

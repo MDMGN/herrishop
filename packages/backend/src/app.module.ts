@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { WarehouseModule } from './warehouse/warehouse.module';
@@ -8,10 +8,14 @@ import { Category } from './warehouse/categories/entities/category.entity';
 import { Brand } from './warehouse/brands/entities/brand.entity';
 import { ConfigModule } from '@nestjs/config'
 import { User } from './warehouse/users/entities/user.entity';
+import { NestApplication } from '@nestjs/core';
+import { LoggerMiddleware } from './middlewares/logger/logger.middleware';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
     TypeOrmModule.forRoot({
     type: 'mysql',
     host: 'localhost',
@@ -34,4 +38,8 @@ import { User } from './warehouse/users/entities/user.entity';
   controllers: [AppController],
   providers: [AppService]
 })
-export class AppModule { }
+export class AppModule { 
+  configure(consumer: MiddlewareConsumer){
+    consumer.apply(LoggerMiddleware).forRoutes('*')
+  }
+}

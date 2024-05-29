@@ -21,7 +21,7 @@ export class User {
     address: string;
 
     @Column("char", { name: 'zip_code', length: 5, nullable: false })
-    zipCode: string;
+    zip_code: string;
 
     @Column("date", { name: 'birthdate', nullable: false })
     birthdate: string;
@@ -37,6 +37,7 @@ export class User {
 
     @Column("timestamp", { default: ()=> 'CURRENT_TIMESTAMP'})
     created_at: string;
+    
     @Column("timestamp", { default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
     updated_at: string;
 }
