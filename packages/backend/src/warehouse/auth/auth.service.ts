@@ -1,10 +1,11 @@
-import {  Injectable, Logger, UnauthorizedException  } from '@nestjs/common';
+import {  BadRequestException, Injectable, Logger, UnauthorizedException  } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../users/entities/user.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt' 
+import { isEmail, isStrongPassword } from 'class-validator';
 
 @Injectable()
 export class AuthService {
@@ -19,15 +20,23 @@ export class AuthService {
   
   async sigin(auth: CreateAuthDto) {
 
-    if(auth.token){
-      try{
-        const payload = JSON.parse(this.verifyAccessToken(auth.token))
-        const user = this.userRepository.findOne({where:{ email: payload.user_email}})
-         return await user
-      }catch(errorJWT){
-          throw new UnauthorizedException()
-      }
+    if(auth?.token){
+        try{
+          const payload = this.verifyAccessToken(auth.token)
+          this.logger.debug(payload)
+          const user =await this.userRepository.findOne({where:{ email: payload.user_email}})
+          const { password, role, updated_at ,...result} = user
+          return  result
+        }catch(errorJWT){
+            throw new UnauthorizedException('Invalid Token')
+        }
     }
+
+    if(!isEmail(auth.email) || !isStrongPassword(auth.password)){
+        throw new BadRequestException('El correo electrónico y el password son requeridos')
+    }
+
+
     const user= await this.userRepository.findOne({ where: {email: auth.email }})
     if(user) {
       const isMatchPassword=await bcrypt.compare(auth.password,user.password)
@@ -36,9 +45,6 @@ export class AuthService {
       }
     }
       throw new UnauthorizedException('La contraseña o email es incorrecta');
-
-
-
   }
 
   public verifyAccessToken(token: string){
