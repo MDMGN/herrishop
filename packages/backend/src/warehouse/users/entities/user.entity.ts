@@ -26,9 +26,6 @@ export class User {
     @Column("date", { name: 'birthdate', nullable: false })
     birthdate: string;
 
-    @Column("varchar", { name: 'token', nullable: true })
-    token: string;
-
     @Column("tinyint", { name: 'status', nullable: false, default: () => 0 })
     status: number;
 
