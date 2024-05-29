@@ -7,7 +7,6 @@ import { Repository } from 'typeorm'
 import { MailerService } from '@nestjs-modules/mailer';
 import * as bcrypt from 'bcrypt';
 import { AuthService } from '../auth/auth.service';
-import { request } from 'express';
 import { MailContext } from 'src/models/mail.model';
 
 @Injectable()
@@ -32,9 +31,9 @@ private logger= new Logger()
     const saltOrRounds = 10;
     const hashPassword = await bcrypt.hash(newUser.password, saltOrRounds);
     newUser.password = hashPassword;
-    const token = this.authService.sigin({email: newUser.email})
-    const host = '192.168.56.1:3000'
-   await this.sendMail('Herrishop <herrishop@herishop.com>',newUser.email,'Confirmar el registro',{host, token, site: 'verify'})
+    const token =await this.authService.getAccessToken(createUserDto.email)
+    const host = 'localhost:3000'
+    await this.sendMail('Herrishop <herrishop@herishop.com>',newUser.email,'Confirmar el registro',{host, token, site: 'verify'})
     return await this.userRepository.save(newUser);
   }
 
