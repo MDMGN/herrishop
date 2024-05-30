@@ -16,7 +16,7 @@ export type ActionCart={
 export function CartReducers(state: Cart, action: ActionCart): Cart {
         switch (action.type) {
           case typeAction.CART_INITIAL:
-                 return {};
+              return {...(action.payload as Cart) };
           case typeAction.CART_ADD:
                 if(action.payload instanceof Object)
                   return {...state, [action.payload.id] : action.payload };

@@ -26,8 +26,6 @@ export function HomeScreen() {
   },[])
 
   return (
-    <View style={{margin:50}}>
       <ProductsContainer products={products} />
-    </View>
   )
 }
