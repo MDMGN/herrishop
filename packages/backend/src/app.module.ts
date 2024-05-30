@@ -8,7 +8,6 @@ import { Category } from './warehouse/categories/entities/category.entity';
 import { Brand } from './warehouse/brands/entities/brand.entity';
 import { ConfigModule } from '@nestjs/config'
 import { User } from './warehouse/users/entities/user.entity';
-import { NestApplication } from '@nestjs/core';
 import { LoggerMiddleware } from './middlewares/logger/logger.middleware';
 import { AuthService } from './warehouse/auth/auth.service';
 import { JwtModule } from '@nestjs/jwt';
@@ -36,6 +35,7 @@ import { JwtModule } from '@nestjs/jwt';
     synchronize: false
   }),
   JwtModule.register({
+    global: true,
     secret: 'SERECRET:API_KEY',
     signOptions: {
       algorithm: 'HS256',

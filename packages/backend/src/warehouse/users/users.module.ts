@@ -7,8 +7,6 @@ import { MailerModule, MailerService } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';  
 import { AuthService } from '../auth/auth.service';
 import { join } from 'path';
-import { JwtModule } from '@nestjs/jwt';
-import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports : [
@@ -38,15 +36,7 @@ import { ConfigModule } from '@nestjs/config';
           },
         }
       )
-    }),
-  ConfigModule,
-  JwtModule.register({
-    secret: 'SERECRET:API_KEY',
-    signOptions: {
-      algorithm: 'HS256',
-      expiresIn: '30d',
-    }
-  })
+    })
   ],
   controllers: [UsersController],
   providers: [UsersService, AuthService],

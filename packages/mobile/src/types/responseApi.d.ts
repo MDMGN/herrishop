@@ -13,9 +13,6 @@ type ResponseError={
 
 type reponseApiLogin={
     error: boolean,
-    message?: string | ErrorMessage,
-    results?: {
-        user: User,
-        orders:Array
-    }
+    status: number,
+    result: User | string
 }

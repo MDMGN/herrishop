@@ -1,10 +1,12 @@
 import { Dispatch, SetStateAction, createContext } from "react";
 
 type UserProvider={
-    user: SetStateAction<User>,
-    isLogin: SetStateAction<boolean>,
+    user: User,
+    isLogin: boolean,
     setIsLogin: Dispatch<SetStateAction<boolean>>,
-    setUser: Dispatch<SetStateAction<User>>
+    setUser: Dispatch<SetStateAction<User>>,
+    token: string | undefined,
+    setToken: Dispatch<SetStateAction<string | undefined>>
 }
 
 export const UserContext=createContext({} as UserProvider);

@@ -7,7 +7,7 @@ export class LoggerMiddleware implements NestMiddleware {
     const {originalUrl, method } = req
     const USER_AGENT= req.headers['user-agent'] || ''
     
-    console.info(`${originalUrl} ${USER_AGENT} ${method} ${JSON.stringify(req.query)}`);
+    console.info(`${originalUrl} ${USER_AGENT} ${method}`);
     next();
   }
 }
