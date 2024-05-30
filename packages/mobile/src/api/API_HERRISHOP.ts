@@ -1,4 +1,4 @@
-const host = '192.168.37.158:3000'
+const host = '92.168.56.1:3000'
 const BASE_URL = `http://${host}/api/v1`
 
 const URL_REGISTER= `${BASE_URL}/users`
