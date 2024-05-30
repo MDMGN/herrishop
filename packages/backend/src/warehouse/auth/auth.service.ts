@@ -27,7 +27,7 @@ export class AuthService {
           const user =await this.userRepository.findOne({where:{ email: payload.user_email}})
           const { password, role, updated_at ,...result} = user
           return  result
-        }catch(errorJWT){
+        }catch(error){
             throw new UnauthorizedException('Invalid Token')
         }
     }
@@ -38,6 +38,7 @@ export class AuthService {
 
 
     const user= await this.userRepository.findOne({ where: {email: auth.email }})
+
     if(user && user.status) {
       const isMatchPassword=await bcrypt.compare(auth.password,user.password)
       if(isMatchPassword){
