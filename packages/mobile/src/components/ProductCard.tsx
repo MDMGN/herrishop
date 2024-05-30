@@ -5,7 +5,7 @@ import { Product } from '../types/entities'
 type Props = {
   product: Product
 }
-
+/*  */
 export function ProductCard(props: Props) {
 
   const {brand, name} = props.product
