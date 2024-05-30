@@ -1,19 +1,21 @@
 import { UserContext } from './UserContext'
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useEffect, useReducer, useState } from 'react'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ajax } from '../../helpers';
 import { URL_LOGIN } from '../../api/API_HERRISHOP';
 import { Alert } from 'react-native';
 import type { User } from '../../types/entities';
+import { CartReducers } from '../../reducers/ProductsReducer';
 
 type Props={
     children: ReactNode
 }
 
 export function UserProvider({children}:Props) {
-  const [isLogin, setIsLogin]=useState(false)
+  const [isLogin, setIsLogin]=useState(true)
   const [user,setUser]=useState({} as User)
   const [token, setToken] = useState<string>()
+  const [cart, dispatchCart] = useReducer<typeof CartReducers>(CartReducers,[])
 
   useEffect(()=>{
     const init= async()=>{
@@ -36,7 +38,6 @@ export function UserProvider({children}:Props) {
             Alert.alert('Inicio de sesión','Lo sentimos, la sesión ha expirado.', [
                {style:'destructive',text:'Aceptar',onPress:()=>setIsLogin(false)}
             ])
-            setIsLogin(false)
           },
         })
     }
@@ -44,7 +45,7 @@ export function UserProvider({children}:Props) {
   },[])
 
   return (
-    <UserContext.Provider value={{user, isLogin, setUser, setIsLogin, token, setToken}}>
+    <UserContext.Provider value={{user, isLogin, setUser, setIsLogin, token, setToken, cart, dispatchCart }}>
         {children}
     </UserContext.Provider>
   )

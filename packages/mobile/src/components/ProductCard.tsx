@@ -3,25 +3,26 @@ import React from 'react'
 import { Product } from '../types/entities'
 import { moneyFormat } from '../helpers'
 import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 
 type Props = {
   product: Product,
 }
-/*  */
+type RootStackParamList = {
+  "product-hunt": { product: Product }
+};
+  
+type ProductScreenNavigationProp = StackNavigationProp<RootStackParamList, "product-hunt">;
+
 export function ProductCard(props: Props) {
-  const {navigate} =useNavigation<any>()
+  const {navigate} =useNavigation<ProductScreenNavigationProp>()
   const {brand, name, unit_price, image, id} = props.product
 
-  /* type RootStackParamList = {
-    "details-hero": { hero: Hero }
-  };
-    
-type DetailsHeroScreenNavigationProp = StackNavigationProp<RootStackParamList, "details-hero">; */
 
   return (
    <Pressable
-     onPress={()=>  navigate('product',{
-        productId: id
+     onPress={()=>  navigate('product-hunt',{
+        product: props.product
      })}
    >
          <View 
