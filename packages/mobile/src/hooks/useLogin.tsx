@@ -2,7 +2,6 @@ import { useContext, useState } from "react"
 import { UserContext } from "../contexts/UserContext"
 import { ajax } from "../helpers"
 import { URL_LOGIN } from "../api/API_HERRISHOP"
-import AsyncStorage from "@react-native-async-storage/async-storage"
 
 type Auth={
   email: string,
@@ -22,10 +21,7 @@ export default function useLogin() {
         data: auth,
         method: 'POST',
         cbSuccess: (response: ReponseApiLogin)=>{
-              const token = response.result
-              const accesToken=JSON.stringify(token) 
-
-                AsyncStorage.setItem("token", accesToken)
+              const {token} = response.result
                 setIsLogin(true);
                 setError(false);
                 setToken(token)

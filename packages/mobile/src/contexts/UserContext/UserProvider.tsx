@@ -12,7 +12,7 @@ type Props={
 }
 
 export function UserProvider({children}:Props) {
-  const [isLogin, setIsLogin]=useState(true)
+  const [isLogin, setIsLogin]=useState(false)
   const [user,setUser]=useState({} as User)
   const [token, setToken] = useState<string>()
   const [cart, dispatchCart] = useReducer<typeof CartReducers>(CartReducers,[])
@@ -43,6 +43,19 @@ export function UserProvider({children}:Props) {
     }
     init();
   },[])
+  useEffect(()=>{
+    const saveCart=async()=>{
+       await AsyncStorage.setItem('cart',JSON.stringify(cart))
+    }
+    saveCart()
+  },[cart])
+
+  useEffect(()=>{
+    const saveCart=async()=>{
+      await AsyncStorage.setItem('token',JSON.stringify({token}))
+   }
+    saveCart()
+  },[token])
 
   return (
     <UserContext.Provider value={{user, isLogin, setUser, setIsLogin, token, setToken, cart, dispatchCart }}>
