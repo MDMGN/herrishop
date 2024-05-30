@@ -22,11 +22,13 @@ export class AuthService {
 
     if(auth?.token){
         try{
+          
           const payload = this.verifyAccessToken(auth.token)
           this.logger.debug(payload)
           const user =await this.userRepository.findOne({where:{ email: payload.user_email}})
           const { password, role, updated_at ,...result} = user
           return  result
+
         }catch(error){
             throw new UnauthorizedException('Invalid Token')
         }
