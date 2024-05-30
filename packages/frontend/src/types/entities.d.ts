@@ -32,7 +32,6 @@ export type User={
     zipCode: string,
     email: string,
     birthdate: string,
-    token?: string
 }
 
 export type Category={

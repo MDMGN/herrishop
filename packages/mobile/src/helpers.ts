@@ -3,6 +3,14 @@ const dateFormat=(date:number | Date | undefined,locales:string | string[] | und
     return new Intl.DateTimeFormat(locales, options).format(date)
 }
 
+const moneyFormat=(money:number):string=>{
+    return new Intl.NumberFormat(navigator.language, {
+        style: 'currency',
+        currency: 'EUR',
+        maximumFractionDigits: 2
+    }).format(money)
+}
+
 const convertDateToISO = (dateStr: string | undefined): string| void => {
     if(!dateStr) return
     // Check if the date is already in ISO format (YYYY-MM-DD)
@@ -54,5 +62,6 @@ export const debounce = <T extends (...args: any[]) => void>(func: T, delay: num
 export {
     dateFormat,
     ajax,
-    convertDateToISO
+    convertDateToISO,
+    moneyFormat
 }

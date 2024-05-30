@@ -1,5 +1,5 @@
 import {  Alert, View } from "react-native";
-import { ProductsConatiner } from "../../components";
+import { ProductsContainer } from "../../components";
 import { useEffect, useState } from "react";
 import { ajax } from "../../helpers";
 import { URL_PRODUCTS } from "../../api/API_HERRISHOP";
@@ -27,7 +27,7 @@ export function HomeScreen() {
 
   return (
     <View style={{margin:50}}>
-      <ProductsConatiner products={products} />
+      <ProductsContainer products={products} />
     </View>
   )
 }

@@ -18,9 +18,10 @@ export function UserProvider({children}:Props) {
   useEffect(()=>{
     const init= async()=>{
 
-      const token = await AsyncStorage.getItem("token");
+      const { token } = JSON.parse(await AsyncStorage.getItem("token") ?? '');
       
       if(!!!token) return;
+      
         ajax({
           url: URL_LOGIN,
           method: 'POST',

@@ -1,10 +1,8 @@
 import { useState } from "react"
 import { ajax, convertDateToISO } from "../helpers"
 import { URL_REGISTER } from "../api/API_HERRISHOP"
+import type { User } from "../types/entities"
 
-const headersList = {
-  "Content-Type": "application/x-www-form-urlencoded"
-}
 
 export default function useRegister() {
   const [user, setUser] = useState({} as User)

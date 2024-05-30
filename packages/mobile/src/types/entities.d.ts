@@ -6,7 +6,6 @@ type User={
     zipCode: string,
     email: string,
     birthdate: string,
-    token?: string
 }
 
 export type Product={
@@ -26,4 +25,14 @@ export type ProductCart = Product &{ amount: number };
 
 export type Cart = {
     [key: Product["id"]] : ProductCart
+}
+
+export type Category={
+    id: number,
+    name: string
+}
+
+export type Brand={
+    id: number,
+    name: string
 }
