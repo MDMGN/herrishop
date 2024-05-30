@@ -1,5 +1,8 @@
+import { useContext } from "react"
+import { UserContext } from "../contexts/UserContext"
 
 export function CheckoutPage({ }) {
+  const  {cart} = useContext(UserContext)
   return (
     <div className="flex justify-between mt-8 flex-wrap lg:justify-center">
           <div className="bg-white rounded shadow p-2 w-full lg:w-2/4">
