@@ -21,9 +21,9 @@ export default function useLogin() {
         url: URL_LOGIN,
         data: auth,
         method: 'POST',
-        cbSuccess: (response: reponseApiLogin)=>{
-              const token = response.result as string
-              const accesToken=JSON.stringify({ token }) 
+        cbSuccess: (response: ReponseApiLogin)=>{
+              const token = response.result
+              const accesToken=JSON.stringify(token) 
 
                 AsyncStorage.setItem("token", accesToken)
                 setIsLogin(true);

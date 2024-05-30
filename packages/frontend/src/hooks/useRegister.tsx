@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { ajax } from "../helpers"
 import { URL_REGISTER } from "../api/API_HERRISHOP"
+import type { reponseApiRegister } from "../types/responseApi"
 
 export default function useRegister() {
     const [user, setUser] = useState({} as User)

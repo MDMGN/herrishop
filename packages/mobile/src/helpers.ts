@@ -25,7 +25,7 @@ type PropsAjax={
     method:string,
     cbSuccess:(response:any)=>void,
     cbError: (error:any)=>void,
-    data: any
+    data?: any
 }
 
 const ajax=({ url, method, cbSuccess, cbError, data }: PropsAjax)=>{

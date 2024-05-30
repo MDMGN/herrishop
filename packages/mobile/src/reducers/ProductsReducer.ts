@@ -1,34 +1,38 @@
-/* import { Hero } from "../types/hero";
+import { Cart, ProductCart } from "../types/entities";
 
 export enum  typeAction{
-    HERO_INITIAL= 'USER_INITIAL',
-    HERO_SAVE='H_SAVE',
-    HERO_ADD='HERO_ADD',
-    HERO_REMOVE='HERO_REMOVE'
+    CART_INITIAL= 'CART_INITIAL',
+    CART_SAVE='CART_SAVE',
+    CART_ADD='CART_ADD',
+    CART_REMOVE='CART_REMOVE'
 }
 
-export type ActionHero={
-    payload : Hero |string|Hero[],
+export type ActionCart={
+    payload : ProductCart | ProductCart["id"],
     type: typeAction
 }
 
 
-export function HeroesReducers(state: Hero[], action: ActionHero): Hero[] {
+export function CartReducers(state: Cart, action: ActionCart): Cart {
         switch (action.type) {
-          case typeAction.HERO_INITIAL:
-            if(action.payload instanceof Array)
-                 return [...action.payload];
-          case typeAction.HERO_ADD:
-                if(typeof action.payload !== 'string' && !(action.payload instanceof Array)) 
-                  return [...state, action.payload];
-          case typeAction.HERO_SAVE:
-            return state.map(hero =>
-              hero.id === (action.payload as Hero).id ? (action.payload as Hero) : hero
-            );
-          case typeAction.HERO_REMOVE:
-            return state.filter(hero => hero.id !== action.payload);
+          case typeAction.CART_INITIAL:
+                 return {};
+          case typeAction.CART_ADD:
+                if(action.payload instanceof Object)
+                  return {...state, [action.payload.id] : action.payload };
+          case typeAction.CART_SAVE:
+            if(action.payload instanceof Object)
+                return {
+                          ...state,
+                          [action.payload.id] : action.payload
+                      }
+          case typeAction.CART_REMOVE:
+            if(typeof action.payload === "number"){
+              const { [action.payload] : deleteValue, ...newValue  } =  state
+              return newValue
+            }
           default:
             return state;
         }
-      }
-       */
+ }
+      

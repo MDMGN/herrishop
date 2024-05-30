@@ -1,3 +1,4 @@
+
 type ReponseApiRegister={
     error : boolean,
     code : number,
@@ -11,8 +12,14 @@ type ResponseError={
 }
 
 
-type reponseApiLogin={
+type ReponseApiLogin={
     error: boolean,
     status: number,
-    result: User | string
+    result: User | { token: string}
+}
+
+type ReponseApiProduts={
+    error: boolean,
+    status: number,
+    data: Product[]
 }
