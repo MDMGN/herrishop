@@ -9,9 +9,9 @@ export class AppController {
   ) {}
 
   @Get('verify')
-  @Render('verify')
+  @Render('verify') // Renderiza la vista verify.hbs
   async verifyEmail(@Query() verifyEmailDto:verifyEmailDto ) {
     const props =await this.appService.verifyEmail(verifyEmailDto.token)
-    return props ;
+    return props ; // Manda la validación del token a la vista
   }
 }

@@ -1,5 +1,7 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
+// Definición de la entidad usuarios
+
 @Entity({ name: 'users' })
 export class User {
     @PrimaryGeneratedColumn('uuid')

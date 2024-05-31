@@ -34,6 +34,7 @@ import { JwtModule } from '@nestjs/jwt';
     ],
     synchronize: false
   }),
+  //Modulo global para JWT
   JwtModule.register({
     global: true,
     secret: 'SERECRET:API_KEY',
@@ -42,11 +43,13 @@ import { JwtModule } from '@nestjs/jwt';
       expiresIn: '30d',
     }
   }),
+  //Modulo global para TypeORM
   TypeOrmModule.forFeature([User]),
     WarehouseModule
   ],
+  //Controladore de AppModule
   controllers: [AppController],
-  providers: [AppService, AuthService]
+  providers: [AppService, AuthService] // ServiciosAA
 })
 export class AppModule { 
   configure(consumer: MiddlewareConsumer){

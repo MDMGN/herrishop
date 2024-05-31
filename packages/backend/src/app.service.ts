@@ -31,9 +31,9 @@ export class AppService {
          isSuccess = true
         }
     
-        message= isSuccess ? "¡Registro exitoso! Te has registrado correctamente." : "¡Oops! Token Invalido. No se ha podido completar tu registro."
       }catch{
-      isSuccess= false
+        isSuccess= false
+        message= isSuccess ? "¡Registro exitoso! Te has registrado correctamente." : "¡Oops! Token Invalido. No se ha podido completar tu registro."
     }
     return { isSuccess, message}
   }
