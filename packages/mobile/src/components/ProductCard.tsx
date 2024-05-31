@@ -71,8 +71,8 @@ const styles = StyleSheet.create({
   textAdded: { 
     textAlign: 'center', 
     position: 'absolute', 
-    bottom: -60,
-    right: 50,
+    top: -195,
+    left: 65,
     textTransform: 'uppercase',
     color: '#008f39',
     elevation: 5,

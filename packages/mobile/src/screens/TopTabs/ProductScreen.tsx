@@ -6,7 +6,8 @@ import useProduct from '../../hooks/useProduct'
 
 
   export  function ProductScreen() {
-    const { cart, handleAddCart, params, setamount, dispatchCart} = useProduct()
+    const { cart, handleAddCart, params, setamount, amount, dispatchCart} = useProduct()
+
 
     return (
       <View>
@@ -31,7 +32,8 @@ import useProduct from '../../hooks/useProduct'
                       <TextInput  
                         onChangeText={value=> setamount(+value)} 
                         keyboardType= 'numeric' 
-                        style= {{ borderColor: '#000', borderWidth: 1, width: 80, height: 30}}
+                        style= {{ borderColor: '#000', fontSize: 15, fontWeight: 'bold', borderWidth: 1, width: 50, height: 30, textAlign: 'center'}}
+                        value= {amount.toString()}
                         />
                     </View>
                     <Text style={{ margin:10, fontSize: 18, fontWeight:'bold'}} >
@@ -45,7 +47,7 @@ import useProduct from '../../hooks/useProduct'
                       :
                     (
                       <TouchableOpacity
-                              onPress={()=>dispatchCart({ payload: params.product?.id!,  type: typeAction.CART_REMOVE }) }
+                              onPress={ ()=> dispatchCart({ payload: params.product?.id!,  type: typeAction.CART_REMOVE }) }
                       >
                         <Text style = {[styles.btn, {backgroundColor: '#ef4444'}]}>Quitar de la cesta</Text> 
                       </TouchableOpacity>

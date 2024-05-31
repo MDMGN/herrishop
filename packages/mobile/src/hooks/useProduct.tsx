@@ -47,6 +47,7 @@ export default function useProduct() {
     setamount, 
     params, 
     handleAddCart,
-    dispatchCart
+    dispatchCart,
+    amount
   }
 }
