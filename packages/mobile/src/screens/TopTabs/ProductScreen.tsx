@@ -20,7 +20,7 @@ import useProduct from '../../hooks/useProduct'
               <ScrollView style={styles.container}>
                   <Text style={{textAlign: 'center', margin:10, fontSize: 20, fontWeight:'bold'}}>{ params.product.name}</Text>
                   <Text  style={{margin:10, fontSize: 18, fontWeight:'bold'}}>Categoria: { params.product.category.name}</Text>
-                  <Image source={ {uri: params.product.image ?? ''}} />
+                  <Image style= {{ width: 500, height: 500 }} source={ {uri: params.product.image ?? ''}} />
                   <Text  style={{ margin:10, fontSize: 16, fontWeight:'400'}}>{ params.product.description}</Text>
                   <Text style={{ margin:10, fontSize: 17, fontWeight:'bold'}}> Precio: {moneyFormat(params.product.unit_price) }</Text>
                    { 
