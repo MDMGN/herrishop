@@ -63,7 +63,7 @@ export function ProductPage() {
                 <NavLink to={`/product/${id}`}>{product.name}</NavLink>
               </div>
             <article className="flex flex-wrap gap-5 w-full h-auto">
-              <img src={product.image ?? ''} className="h-full w-5" />
+              <img src={product.image ?? ''} className="h-full w-500" />
               <div className="relative p-10 flex flex-col flex-wrap gap-5">
                 <span 
                   className="absolute font-bold p-2 text-[25px] text-yellow-500 after:bg-yellow-500 after:w-20 after:absolute after:h-1 after:left-[-5px] after:top-[0px]"

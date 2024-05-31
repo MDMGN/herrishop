@@ -3,10 +3,9 @@ import { useContext } from 'react'
 import { FlatList } from 'react-native-gesture-handler'
 import { UserContext } from '../../contexts/UserContext'
 import { CartItem } from '../../components'
-import { moneyFormat } from '../../helpers'
 
 export  function CartScreen() {
-  const {cart} = useContext(UserContext)
+  const { cart } = useContext(UserContext)
   return  Object.keys(cart).length  ?(
       <FlatList
         data={Object.values(cart)}
