@@ -13,7 +13,8 @@ Este es el proyecto FCT para el Grado Superior en Desarrollo de Aplicaciones Mul
 ## Requisitos
 
 - Node.js (versión 16 o superior)
-- pnpm (versión 6 o superior)
+- VSCode
+- Android Studios (SDK)
 
 ## Instalación
 
