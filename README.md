@@ -40,6 +40,7 @@ android\sdk\platform-tools
         const host = '0.0.0.0:3000'
     ```
     El backend se ejecuta en el puerto __3000__
+- Dentro de ___packages/dbherrishop.sql___ se encuentra el script con la base de datos.
 ### Clonar el Repositorio
 
 ```bash
