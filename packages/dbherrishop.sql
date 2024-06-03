@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-05-2024 a las 20:24:43
+-- Tiempo de generación: 03-06-2024 a las 11:41:43
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `dbherrishop`
 --
-CREATE DATABASE IF NOT EXISTS `dbherrishop` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `dbherrishop`;
 
 -- --------------------------------------------------------
 
@@ -29,7 +27,6 @@ USE `dbherrishop`;
 -- Estructura de tabla para la tabla `brands`
 --
 
-DROP TABLE IF EXISTS `brands`;
 CREATE TABLE `brands` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL
@@ -57,7 +54,6 @@ INSERT INTO `brands` (`id`, `name`) VALUES
 -- Estructura de tabla para la tabla `categories`
 --
 
-DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL
@@ -85,7 +81,6 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 -- Estructura de tabla para la tabla `customers`
 --
 
-DROP TABLE IF EXISTS `customers`;
 CREATE TABLE `customers` (
   `id` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
@@ -119,7 +114,6 @@ INSERT INTO `customers` (`id`, `name`, `surname`, `age`, `address`, `city`, `pho
 -- Estructura de tabla para la tabla `products`
 --
 
-DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -137,16 +131,16 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `customer_id`, `category_id`, `brand_id`, `unit_price`, `unit_stock`, `description`, `image`) VALUES
-(1, 'Camisa de algodón', 1, 1, 1, 30, 100, 'Camisa de algodón de alta calidad, perfecta para cualquier ocasión.', NULL),
-(2, 'Libro de poesía', 2, 2, 2, 20, 50, 'Una colección de poesías de renombrados autores contemporáneos.', NULL),
-(3, 'Lavadora de carga frontal', 3, 3, 3, 600, 30, 'Lavadora de carga frontal eficiente y de bajo consumo energético.', NULL),
-(4, 'Pintura al óleo', 4, 4, 4, 100, 20, 'Una obra de arte al óleo pintada a mano, ideal para decorar tu hogar.', NULL),
-(5, 'Sofá de cuero', 5, 5, 5, 800, 10, 'Sofá de cuero genuino, elegante y cómodo para tu sala de estar.', NULL),
-(6, 'Vino tinto reserva', 6, 6, 6, 40, 50, 'Botella de vino tinto reserva, añada especial para paladares exigentes.', NULL),
-(7, 'Set de herramientas básicas', 7, 7, 7, 50, 40, 'Un completo set de herramientas básicas para cualquier tarea de bricolaje.', NULL),
-(8, 'Vestido de noche', 8, 8, 8, 80, 25, 'Elegante vestido de noche, perfecto para ocasiones especiales.', NULL),
-(9, 'Balón de fútbol', 9, 9, 9, 15, 100, 'Balón de fútbol de alta calidad, ideal para partidos recreativos.', NULL),
-(10, 'Ramito de flores mixtas', 10, 10, 10, 30, 50, 'Un hermoso ramito de flores mixtas, perfecto para regalar a alguien especial.', NULL);
+(1, 'Camisa de algodón', 1, 1, 1, 30, 100, 'Camisa de algodón de alta calidad, perfecta para cualquier ocasión.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019'),
+(2, 'Libro de poesía', 2, 2, 2, 20, 50, 'Una colección de poesías de renombrados autores contemporáneos.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019'),
+(3, 'Lavadora de carga frontal', 3, 3, 3, 600, 30, 'Lavadora de carga frontal eficiente y de bajo consumo energético.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019'),
+(4, 'Pintura al óleo', 4, 4, 4, 100, 20, 'Una obra de arte al óleo pintada a mano, ideal para decorar tu hogar.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019'),
+(5, 'Sofá de cuero', 5, 5, 5, 800, 10, 'Sofá de cuero genuino, elegante y cómodo para tu sala de estar.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019'),
+(6, 'Vino tinto reserva', 6, 6, 6, 40, 50, 'Botella de vino tinto reserva, añada especial para paladares exigentes.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019'),
+(7, 'Set de herramientas básicas', 7, 7, 7, 50, 40, 'Un completo set de herramientas básicas para cualquier tarea de bricolaje.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019'),
+(8, 'Vestido de noche', 8, 8, 8, 80, 25, 'Elegante vestido de noche, perfecto para ocasiones especiales.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019'),
+(9, 'Balón de fútbol', 9, 9, 9, 15, 100, 'Balón de fútbol de alta calidad, ideal para partidos recreativos.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019'),
+(10, 'Ramito de flores mixtas', 10, 10, 10, 30, 50, 'Un hermoso ramito de flores mixtas, perfecto para regalar a alguien especial.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019');
 
 -- --------------------------------------------------------
 
@@ -154,7 +148,6 @@ INSERT INTO `products` (`id`, `name`, `customer_id`, `category_id`, `brand_id`, 
 -- Estructura de tabla para la tabla `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` char(36) NOT NULL,
   `name` varchar(20) NOT NULL,
@@ -164,9 +157,8 @@ CREATE TABLE `users` (
   `email` varchar(50) NOT NULL,
   `zip_code` char(5) NOT NULL,
   `birthdate` date NOT NULL,
-  `token` varchar(250) DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 0,
-  `role` varchar(20) NOT NULL,
+  `role` varchar(20) NOT NULL DEFAULT 'USER',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -175,8 +167,8 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `password`, `surname`, `address`, `email`, `zip_code`, `birthdate`, `token`, `status`, `role`, `created_at`, `updated_at`) VALUES
-('11304d35-e149-458d-8771-eb966a57f229', 'Darren', '$2b$10$yL.5TbuaZ7dFyELN/gVB/.dImFayxl6gLiIj30/Ttu5t8BFr.uzlK', 'Vargas Ramirez', 'Pinutegi', 'michaelmdvr@gmail.com', '', '1999-04-07', NULL, 0, '', '2024-05-28 18:22:19', NULL);
+INSERT INTO `users` (`id`, `name`, `password`, `surname`, `address`, `email`, `zip_code`, `birthdate`, `status`, `role`, `created_at`, `updated_at`) VALUES
+('6bb8b179-98ba-41ee-90f1-4d3ab9dbc75c', 'Darren', '$2b$10$kcHCEli5A41fZEerqPJm6uxHm8PnCNhB8usLrD/N1uSOu8NIcECSe', 'Vargas Ramirez', 'Pinutegi', 'michaelmdvr@gmail.com', '20160', '1999-07-04', 1, 'USER', '2024-05-31 10:33:07', NULL);
 
 --
 -- Índices para tablas volcadas
