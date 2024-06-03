@@ -1,6 +1,8 @@
 import { IsJWT } from "class-validator";
 
-export class verifyEmailDto{
-    @IsJWT()
-    token:string;
+// DTO para la verificación del correo electrónico
+export class VerifyEmailDto {
+  // Valida que el token sea un JWT válido
+  @IsJWT()
+  token: string;
 }

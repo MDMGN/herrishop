@@ -14,45 +14,50 @@ import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
+    // Módulo de configuración global
     ConfigModule.forRoot({
       isGlobal: true
     }),
+    // Configuración de TypeORM para la base de datos MySQL
     TypeOrmModule.forRoot({
-    type: 'mysql',
-    host: 'localhost',
-    port: 3306,
-    username: 'root',
-    password: '',
-    database: 'dbherrishop',
-    logger: 'debug',
-    logging: 'all',
-    entities: [
-      Product,
-      Category,
-      Brand,
-      User
-    ],
-    synchronize: false
-  }),
-  //Modulo global para JWT
-  JwtModule.register({
-    global: true,
-    secret: 'SERECRET:API_KEY',
-    signOptions: {
-      algorithm: 'HS256',
-      expiresIn: '30d',
-    }
-  }),
-  //Modulo global para TypeORM
-  TypeOrmModule.forFeature([User]),
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: '',
+      database: 'dbherrishop',
+      logger: 'debug',
+      logging: 'all',
+      entities: [
+        Product,
+        Category,
+        Brand,
+        User
+      ],
+      synchronize: false, // No sincronizar automáticamente las entidades con la base de datos,
+    }),
+    // Módulo global para JWT
+    JwtModule.register({
+      global: true,
+      secret: process.env.JWT_SECRECT_KEY, // Clave secreta para firmar tokens JWT
+      signOptions: {
+        algorithm: 'HS256', // Algoritmo de firma
+        expiresIn: '30d',   // Duración de los tokens
+      }
+    }),
+    // Registro de la entidad User en TypeORM
+    TypeOrmModule.forFeature([User]),
+    // Módulo del almacén
     WarehouseModule
   ],
-  //Controladore de AppModule
+  // Controladores del módulo App
   controllers: [AppController],
-  providers: [AppService, AuthService] // ServiciosAA
+  // Proveedores de servicios del módulo
+  providers: [AppService, AuthService]
 })
 export class AppModule { 
-  configure(consumer: MiddlewareConsumer){
+  configure(consumer: MiddlewareConsumer) {
+    // Aplicar el middleware de registro de peticiones a todas las rutas
     consumer.apply(LoggerMiddleware).forRoutes('*')
   }
 }

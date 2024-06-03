@@ -26,7 +26,7 @@ const ajax=({ url, method, cbSuccess, cbError, data }: PropsAjax)=>{
     .catch(cbError)
 }
 
-export {
+export {/* A */
     dateFormat,
     ajax
 }
