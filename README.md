@@ -21,16 +21,8 @@ Este es el proyecto FCT para el Grado Superior en Desarrollo de Aplicaciones Mul
 Sigue estos pasos para configurar el emulador, clonar el repositorio, instalar las dependencias necesarias y arrancar el proyecto.
 
 ### Configuración para el emulador Android y React Native
-Colocar la ruta del sdk de android en las variables de entorno:
 
-- Como nuevos valores de la variable __Path__:
-
-```bash
-android\sdk\
-android\sdk\platform-tools
-```
-
-- Agregar una nueva variable __ANDROID_HOME__ y como valor:
+- En las variables de entorno, s¡agregar una nueva variable __ANDROID_HOME__ y como valor:
         ```
         android\sdk\
         ```
