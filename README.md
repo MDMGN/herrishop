@@ -34,7 +34,7 @@ android\sdk\platform-tools
         ```
         android\sdk\
         ```
-### Configuración del host para la app mobile
+### Configuración del host para la app mobile.
 - Dentro de ___packages/mobile/src/api___.
     ```ts
     //Cambia 0.0.0.0 por tu dirección IPv4
@@ -49,7 +49,7 @@ git clone https://github.com/MDMGN/herrishop.git
 cd herrishop
 ```
 
-### Instalar las dependencias
+### Instalar las dependencias.
 
 ```bash
 npm install -g pnpm
@@ -60,7 +60,14 @@ npm install -g pnpm
 pnpm install
 ```
 
-### Correr en conjunto la aplicaciones backend, web y mobile
+### Correr  las aplicaciones backend y web.
+ - Abrir otra consola en el la carpeteta raíz del proyecto.
+
+```bash
+pnpm run dev:mobile
+```
+
+### Correr  la aplicación móvile.
 
 ```bash
 pnpm run dev

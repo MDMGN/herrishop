@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2024 a las 11:41:43
+-- Tiempo de generación: 06-06-2024 a las 23:10:17
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `dbherrishop`
 --
+CREATE DATABASE IF NOT EXISTS `dbherrishop` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `dbherrishop`;
 
 -- --------------------------------------------------------
 
@@ -27,6 +29,7 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `brands`
 --
 
+DROP TABLE IF EXISTS `brands`;
 CREATE TABLE `brands` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL
@@ -54,6 +57,7 @@ INSERT INTO `brands` (`id`, `name`) VALUES
 -- Estructura de tabla para la tabla `categories`
 --
 
+DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL
@@ -81,6 +85,7 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 -- Estructura de tabla para la tabla `customers`
 --
 
+DROP TABLE IF EXISTS `customers`;
 CREATE TABLE `customers` (
   `id` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
@@ -114,6 +119,7 @@ INSERT INTO `customers` (`id`, `name`, `surname`, `age`, `address`, `city`, `pho
 -- Estructura de tabla para la tabla `products`
 --
 
+DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -148,6 +154,7 @@ INSERT INTO `products` (`id`, `name`, `customer_id`, `category_id`, `brand_id`, 
 -- Estructura de tabla para la tabla `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` char(36) NOT NULL,
   `name` varchar(20) NOT NULL,
