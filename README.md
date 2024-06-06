@@ -55,12 +55,11 @@ pnpm install
 ### Correr  las aplicaciones backend y web.
  - Abrir otra consola en el la carpeteta raíz del proyecto.
 
-```bash
-pnpm run dev:mobile
-```
-
-### Correr  la aplicación móvile.
 
 ```bash
 pnpm run dev
+```
+### Correr  la aplicación móvile.
+```bash
+pnpm run dev:mobile
 ```
