@@ -21,7 +21,7 @@ export default function useLogin() {
         data: auth,
         method: 'POST',
         cbSuccess: (response: ReponseApiLogin)=>{
-              const {token} = response.result
+              const token= response.result
                 setIsLogin(true);
                 setError(false);
                 setToken(token)

@@ -17,44 +17,43 @@ export function UserProvider({children}:Props) {
   const [token, setToken] = useState<string>()
   const [cart, dispatchCart] = useReducer<typeof CartReducers>(CartReducers,[])
 
+  const getUserByAccessToken= async()=>{
+    const { token } = JSON.parse(await AsyncStorage.getItem("token") ?? '');
+    
+    if(!!!token) return;
+    
+      ajax({
+        url: URL_LOGIN,
+        method: 'POST',
+        data: { token },
+        cbSuccess:(response: ReponseApiLogin)=>{
+          if(!response.error){
+              setUser(()=> response.result as User)
+              setIsLogin(true)
+          }
+        },
+        cbError: (error)=>{
+          Alert.alert('Inicio de sesión','Lo sentimos, la sesión ha expirado.', [
+                    {style:'destructive',text:'Aceptar',onPress:()=>setIsLogin(false)}
+          ])
+        },
+      })
+  }
   useEffect(()=>{
-    const init= async()=>{
+      getUserByAccessToken();
+    },[])
+    
+    useEffect(()=>{
+      const saveCart=async()=> await AsyncStorage.setItem('cart',JSON.stringify(cart))
+      saveCart()
+    },[cart])
 
-      const { token } = JSON.parse(await AsyncStorage.getItem("token") ?? '');
-      
+  useEffect(()=>{
+    const saveToken=async()=>{
       if(!!!token) return;
-      
-        ajax({
-          url: URL_LOGIN,
-          method: 'POST',
-          data: { token },
-          cbSuccess:(response: ReponseApiLogin)=>{
-            if(!response.error){
-                setUser(()=> response.result as User)
-                setIsLogin(true)
-            }
-          },
-          cbError: (error)=>{
-            Alert.alert('Inicio de sesión','Lo sentimos, la sesión ha expirado.', [
-               {style:'destructive',text:'Aceptar',onPress:()=>setIsLogin(false)}
-            ])
-          },
-        })
-    }
-    init();
-  },[])
-  useEffect(()=>{
-    const saveCart=async()=>{
-       await AsyncStorage.setItem('cart',JSON.stringify(cart))
-    }
-    saveCart()
-  },[cart])
-
-  useEffect(()=>{
-    const saveCart=async()=>{
       await AsyncStorage.setItem('token',JSON.stringify({token}))
    }
-    saveCart()
+    saveToken()
   },[token])
 
   return (
